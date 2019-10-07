@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Salvo {
 	
@@ -19,9 +21,10 @@ public class Salvo {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private long id;
 
-    private int turn;
-
-    @ManyToOne(fetch = FetchType.EAGER)
+    private Integer turn;
+    
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="game_player")
     private GamePlayer gamePlayer;
     

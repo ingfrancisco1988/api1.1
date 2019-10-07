@@ -20,6 +20,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class GamePlayer implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7555577210933243819L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "gamePlayer_id", unique = true, nullable = false)
@@ -33,6 +37,9 @@ public class GamePlayer implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY)
 	 @JoinColumn(name="PLAYER_ID")
 	private Player player;
+	
+	@OneToMany(mappedBy="gamePlayer", fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Salvo> salvoes;
 	
 	@JsonIgnore
 	private Date joinDate;
@@ -82,5 +89,15 @@ public class GamePlayer implements Serializable {
 		this.ships = ships;
 	}
 
+	public Set<Salvo> getSalvoes() {
+		return salvoes;
+	}
+
+	public void setSalvoes(Set<Salvo> salvoes) {
+		this.salvoes = salvoes;
+	}
+	
+
+	
 
 }
