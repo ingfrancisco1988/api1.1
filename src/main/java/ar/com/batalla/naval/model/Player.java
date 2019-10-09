@@ -1,7 +1,9 @@
 package ar.com.batalla.naval.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,8 +12,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
@@ -27,6 +27,9 @@ public class Player {
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player")
 	  private Set<GamePlayer> gamePlayer;
+	
+	@OneToMany(mappedBy="player", fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Score> scores = new HashSet<>();
 	
 	public Player() {
 	}
@@ -48,6 +51,12 @@ public class Player {
 	
 	public void setGamePlayer(Set<GamePlayer> gamePlayer) {
 		this.gamePlayer = gamePlayer;
+	}
+	public Set<Score> getScores() {
+		return scores;
+	}
+	public void setScores(Set<Score> scores) {
+		this.scores = scores;
 	}
 	
 	

@@ -23,6 +23,9 @@ public class Game implements Serializable {
 
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "game")
   private Set<GamePlayer> gamePlayer;
+  
+  @OneToMany(mappedBy="game", fetch=FetchType.LAZY)
+  private Set<Score> scores;
 
   public Long getId() {
     return id;
@@ -48,4 +51,14 @@ public class Game implements Serializable {
   public void setGamePlayer(Set<GamePlayer> gamePlayer) {
     this.gamePlayer = gamePlayer;
   }
+
+public Set<Score> getScores() {
+	return scores;
+}
+
+public void setScores(Set<Score> scores) {
+	this.scores = scores;
+}
+  
+  
 }
